@@ -31,7 +31,7 @@ jobs:
             dep ensure
         fi
     - name: Build
-      run: chmod +x build_proto.sh && ./build_proto.sh && go build -v -o ecust-library
+      run: go build -v -o ecust-library
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:

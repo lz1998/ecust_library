@@ -26,7 +26,7 @@ jobs:
       run: |
         go get -v -t -d ./...
     - name: Build
-      run: chmod +x build_proto.sh && ./build_proto.sh && go build -v -o ecust-library.exe
+      run: go build -v -o ecust-library.exe
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
