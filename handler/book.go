@@ -58,7 +58,7 @@ func UpdateBook(c *gin.Context) {
 		return
 	}
 
-	for _, b := range req.Book {
+	for _, b := range req.Books {
 		if err := book.UpdateBook(b.Id, b.Author, b.Title, b.Press, b.Year, b.BookId, b.Isbn, b.Institution, b.Status); err != nil {
 			c.String(http.StatusInternalServerError, "db error")
 			return

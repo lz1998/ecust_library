@@ -2,4 +2,4 @@
 
 mkdir dto
 
-protoc -I proto --gofast_out=dto proto/*.proto
+protoc -I ecust_library_idl --gofast_out=dto ecust_library_idl/*.proto
