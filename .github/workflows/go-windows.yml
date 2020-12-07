@@ -20,14 +20,11 @@ jobs:
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
-
+      with:
+        submodules: true
     - name: Get dependencies
       run: |
         go get -v -t -d ./...
-    - name: Checkout submodules
-      uses: textbook/git-checkout-submodule-action@master
-      with:
-        remote: true
     - name: Build
       run: chmod +x build_proto.sh && ./build_proto.sh && go build -v -o ecust-library.exe
     - name: Upload Artifact
