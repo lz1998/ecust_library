@@ -28,9 +28,12 @@ jobs:
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             dep ensure
         fi
-
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@master
+      with:
+        remote: true
     - name: Build
-      run: go build -v -o ecust-library
+      run: chmod +x build_proto.sh && ./build_proto.sh && go build -v -o ecust-library
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
