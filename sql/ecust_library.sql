@@ -15,3 +15,15 @@ CREATE TABLE `ecust_book`
     UNIQUE KEY `uniq_isbn` (`isbn`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 COMMENT ='著作信息';
+
+CREATE TABLE `ecust_admin`
+(
+    `id`         bigint unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '主键',
+    `username`   varchar(255)    NOT NULL DEFAULT '' COMMENT '用户名',
+    `password`   varchar(255)    NOT NULL DEFAULT '' COMMENT '密码',
+    `status`     integer         NOT NULL DEFAULT false COMMENT '是否已删除',
+    `created_at` timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at` timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    UNIQUE KEY `uniq_username` (`username`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 COMMENT ='管理员';

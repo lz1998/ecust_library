@@ -18,6 +18,11 @@ func main() {
 	router := gin.Default()
 	{
 		group := router.Group("/ecust")
+
+		group.POST("/admin/list", handler.ListAdmin)
+		group.POST("/admin/create", handler.CreateAdmin)
+		group.POST("/admin/update", handler.UpdateAdmin)
+
 		group.POST("/book/list", handler.ListBook)
 		group.POST("/book/create", handler.CreateBook)
 		group.POST("/book/update", handler.UpdateBook)

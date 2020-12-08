@@ -161,6 +161,8 @@ type ListBookReq struct {
 	BookId               []string `protobuf:"bytes,6,rep,name=book_id,json=bookId,proto3" json:"book_id,omitempty"`
 	Isbn                 []string `protobuf:"bytes,7,rep,name=isbn,proto3" json:"isbn,omitempty"`
 	Institution          []string `protobuf:"bytes,8,rep,name=institution,proto3" json:"institution,omitempty"`
+	Offset               int32    `protobuf:"varint,9,opt,name=offset,proto3" json:"offset,omitempty"`
+	Count                int32    `protobuf:"varint,10,opt,name=count,proto3" json:"count,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -253,6 +255,20 @@ func (m *ListBookReq) GetInstitution() []string {
 		return m.Institution
 	}
 	return nil
+}
+
+func (m *ListBookReq) GetOffset() int32 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+func (m *ListBookReq) GetCount() int32 {
+	if m != nil {
+		return m.Count
+	}
+	return 0
 }
 
 type ListBookResp struct {
@@ -480,6 +496,359 @@ func (m *UpdateBookResp) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_UpdateBookResp proto.InternalMessageInfo
 
+type EcustAdmin struct {
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Username             string   `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
+	Password             string   `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	Status               int32    `protobuf:"varint,4,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt            int64    `protobuf:"varint,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            int64    `protobuf:"varint,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *EcustAdmin) Reset()         { *m = EcustAdmin{} }
+func (m *EcustAdmin) String() string { return proto.CompactTextString(m) }
+func (*EcustAdmin) ProtoMessage()    {}
+func (*EcustAdmin) Descriptor() ([]byte, []int) {
+	return fileDescriptor_52fb6540b8b7cdac, []int{7}
+}
+func (m *EcustAdmin) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *EcustAdmin) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_EcustAdmin.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *EcustAdmin) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EcustAdmin.Merge(m, src)
+}
+func (m *EcustAdmin) XXX_Size() int {
+	return m.Size()
+}
+func (m *EcustAdmin) XXX_DiscardUnknown() {
+	xxx_messageInfo_EcustAdmin.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_EcustAdmin proto.InternalMessageInfo
+
+func (m *EcustAdmin) GetId() int64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *EcustAdmin) GetUsername() string {
+	if m != nil {
+		return m.Username
+	}
+	return ""
+}
+
+func (m *EcustAdmin) GetPassword() string {
+	if m != nil {
+		return m.Password
+	}
+	return ""
+}
+
+func (m *EcustAdmin) GetStatus() int32 {
+	if m != nil {
+		return m.Status
+	}
+	return 0
+}
+
+func (m *EcustAdmin) GetCreatedAt() int64 {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return 0
+}
+
+func (m *EcustAdmin) GetUpdatedAt() int64 {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return 0
+}
+
+type CreateAdminReq struct {
+	Admins               []*EcustAdmin `protobuf:"bytes,1,rep,name=admins,proto3" json:"admins,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
+}
+
+func (m *CreateAdminReq) Reset()         { *m = CreateAdminReq{} }
+func (m *CreateAdminReq) String() string { return proto.CompactTextString(m) }
+func (*CreateAdminReq) ProtoMessage()    {}
+func (*CreateAdminReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_52fb6540b8b7cdac, []int{8}
+}
+func (m *CreateAdminReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *CreateAdminReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_CreateAdminReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *CreateAdminReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateAdminReq.Merge(m, src)
+}
+func (m *CreateAdminReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *CreateAdminReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateAdminReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateAdminReq proto.InternalMessageInfo
+
+func (m *CreateAdminReq) GetAdmins() []*EcustAdmin {
+	if m != nil {
+		return m.Admins
+	}
+	return nil
+}
+
+type CreateAdminResp struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateAdminResp) Reset()         { *m = CreateAdminResp{} }
+func (m *CreateAdminResp) String() string { return proto.CompactTextString(m) }
+func (*CreateAdminResp) ProtoMessage()    {}
+func (*CreateAdminResp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_52fb6540b8b7cdac, []int{9}
+}
+func (m *CreateAdminResp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *CreateAdminResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_CreateAdminResp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *CreateAdminResp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateAdminResp.Merge(m, src)
+}
+func (m *CreateAdminResp) XXX_Size() int {
+	return m.Size()
+}
+func (m *CreateAdminResp) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateAdminResp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateAdminResp proto.InternalMessageInfo
+
+type ListAdminReq struct {
+	Usernames            []string `protobuf:"bytes,1,rep,name=usernames,proto3" json:"usernames,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ListAdminReq) Reset()         { *m = ListAdminReq{} }
+func (m *ListAdminReq) String() string { return proto.CompactTextString(m) }
+func (*ListAdminReq) ProtoMessage()    {}
+func (*ListAdminReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_52fb6540b8b7cdac, []int{10}
+}
+func (m *ListAdminReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListAdminReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListAdminReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListAdminReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListAdminReq.Merge(m, src)
+}
+func (m *ListAdminReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListAdminReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListAdminReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListAdminReq proto.InternalMessageInfo
+
+func (m *ListAdminReq) GetUsernames() []string {
+	if m != nil {
+		return m.Usernames
+	}
+	return nil
+}
+
+type ListAdminResp struct {
+	Admins               []*EcustAdmin `protobuf:"bytes,2,rep,name=admins,proto3" json:"admins,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
+}
+
+func (m *ListAdminResp) Reset()         { *m = ListAdminResp{} }
+func (m *ListAdminResp) String() string { return proto.CompactTextString(m) }
+func (*ListAdminResp) ProtoMessage()    {}
+func (*ListAdminResp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_52fb6540b8b7cdac, []int{11}
+}
+func (m *ListAdminResp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ListAdminResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ListAdminResp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ListAdminResp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListAdminResp.Merge(m, src)
+}
+func (m *ListAdminResp) XXX_Size() int {
+	return m.Size()
+}
+func (m *ListAdminResp) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListAdminResp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListAdminResp proto.InternalMessageInfo
+
+func (m *ListAdminResp) GetAdmins() []*EcustAdmin {
+	if m != nil {
+		return m.Admins
+	}
+	return nil
+}
+
+type UpdateAdminReq struct {
+	Admins               []*EcustAdmin `protobuf:"bytes,1,rep,name=admins,proto3" json:"admins,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
+}
+
+func (m *UpdateAdminReq) Reset()         { *m = UpdateAdminReq{} }
+func (m *UpdateAdminReq) String() string { return proto.CompactTextString(m) }
+func (*UpdateAdminReq) ProtoMessage()    {}
+func (*UpdateAdminReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_52fb6540b8b7cdac, []int{12}
+}
+func (m *UpdateAdminReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateAdminReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateAdminReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateAdminReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateAdminReq.Merge(m, src)
+}
+func (m *UpdateAdminReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateAdminReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateAdminReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateAdminReq proto.InternalMessageInfo
+
+func (m *UpdateAdminReq) GetAdmins() []*EcustAdmin {
+	if m != nil {
+		return m.Admins
+	}
+	return nil
+}
+
+type UpdateAdminResp struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateAdminResp) Reset()         { *m = UpdateAdminResp{} }
+func (m *UpdateAdminResp) String() string { return proto.CompactTextString(m) }
+func (*UpdateAdminResp) ProtoMessage()    {}
+func (*UpdateAdminResp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_52fb6540b8b7cdac, []int{13}
+}
+func (m *UpdateAdminResp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *UpdateAdminResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_UpdateAdminResp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *UpdateAdminResp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateAdminResp.Merge(m, src)
+}
+func (m *UpdateAdminResp) XXX_Size() int {
+	return m.Size()
+}
+func (m *UpdateAdminResp) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateAdminResp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateAdminResp proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*EcustBook)(nil), "dto.EcustBook")
 	proto.RegisterType((*ListBookReq)(nil), "dto.ListBookReq")
@@ -488,41 +857,58 @@ func init() {
 	proto.RegisterType((*CreateBookResp)(nil), "dto.CreateBookResp")
 	proto.RegisterType((*UpdateBookReq)(nil), "dto.UpdateBookReq")
 	proto.RegisterType((*UpdateBookResp)(nil), "dto.UpdateBookResp")
+	proto.RegisterType((*EcustAdmin)(nil), "dto.EcustAdmin")
+	proto.RegisterType((*CreateAdminReq)(nil), "dto.CreateAdminReq")
+	proto.RegisterType((*CreateAdminResp)(nil), "dto.CreateAdminResp")
+	proto.RegisterType((*ListAdminReq)(nil), "dto.ListAdminReq")
+	proto.RegisterType((*ListAdminResp)(nil), "dto.ListAdminResp")
+	proto.RegisterType((*UpdateAdminReq)(nil), "dto.UpdateAdminReq")
+	proto.RegisterType((*UpdateAdminResp)(nil), "dto.UpdateAdminResp")
 }
 
 func init() { proto.RegisterFile("ecust_library.proto", fileDescriptor_52fb6540b8b7cdac) }
 
 var fileDescriptor_52fb6540b8b7cdac = []byte{
-	// 451 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x93, 0xcd, 0x6e, 0x13, 0x31,
-	0x10, 0x80, 0xf1, 0x6e, 0xfe, 0x76, 0x02, 0x51, 0x70, 0xf9, 0x31, 0x95, 0x1a, 0xad, 0x22, 0x0e,
-	0x39, 0x05, 0xa9, 0xd0, 0x07, 0x68, 0x11, 0x07, 0x24, 0xa4, 0x4a, 0x8b, 0x38, 0x94, 0xcb, 0x6a,
-	0x13, 0x5b, 0xc2, 0x4a, 0xb5, 0x5e, 0xec, 0x59, 0xa4, 0xbe, 0x49, 0x5f, 0x83, 0xb7, 0xe0, 0xc8,
-	0x99, 0x13, 0x0a, 0x2f, 0x82, 0x3c, 0xde, 0xa6, 0x9b, 0x34, 0x48, 0xf4, 0xe6, 0xf9, 0xc6, 0x33,
-	0x99, 0xf9, 0xb2, 0x86, 0x03, 0xb5, 0xac, 0x1d, 0xe6, 0x97, 0x7a, 0x61, 0x0b, 0x7b, 0x35, 0xaf,
-	0xac, 0x41, 0xc3, 0x63, 0x89, 0x66, 0x7a, 0x1d, 0x41, 0xf2, 0xce, 0x27, 0xcf, 0x8c, 0x59, 0xf1,
-	0x11, 0x44, 0x5a, 0x0a, 0x96, 0xb2, 0x59, 0x9c, 0x45, 0x5a, 0xf2, 0x67, 0xd0, 0x2b, 0x6a, 0xfc,
-	0x62, 0xac, 0x88, 0x52, 0x36, 0x4b, 0xb2, 0x26, 0xe2, 0x4f, 0xa0, 0x8b, 0x1a, 0x2f, 0x95, 0x88,
-	0x09, 0x87, 0xc0, 0xd3, 0xca, 0x2a, 0xe7, 0x44, 0x27, 0x50, 0x0a, 0x38, 0x87, 0xce, 0x95, 0x2a,
-	0xac, 0xe8, 0xa6, 0x6c, 0xd6, 0xcd, 0xe8, 0xcc, 0x9f, 0x43, 0x7f, 0x61, 0xcc, 0x2a, 0xd7, 0x52,
-	0xf4, 0x42, 0x63, 0x1f, 0xbe, 0x97, 0xfe, 0xb2, 0x76, 0x8b, 0x52, 0xf4, 0x89, 0xd2, 0x99, 0xa7,
-	0x30, 0xd4, 0xa5, 0x43, 0x8d, 0x35, 0x6a, 0x53, 0x8a, 0x01, 0xa5, 0xda, 0xc8, 0x8f, 0xe9, 0xb0,
-	0xc0, 0xda, 0x89, 0x84, 0x7e, 0xa4, 0x89, 0xf8, 0x11, 0xc0, 0xd2, 0xaa, 0x02, 0x95, 0xcc, 0x0b,
-	0x14, 0x40, 0x6b, 0x25, 0x0d, 0x39, 0x45, 0x9f, 0xae, 0x2b, 0x79, 0x93, 0x1e, 0x86, 0x74, 0x43,
-	0x4e, 0x71, 0xfa, 0x8b, 0xc1, 0xf0, 0x83, 0x0e, 0x66, 0x32, 0xf5, 0xb5, 0x25, 0x83, 0xa5, 0xf1,
-	0x3e, 0x19, 0x11, 0xe1, 0x5d, 0x19, 0x71, 0xa0, 0x41, 0xc6, 0x11, 0x80, 0xc3, 0xc2, 0x62, 0x4e,
-	0x4a, 0x3a, 0x34, 0x6d, 0x42, 0xe4, 0xc2, 0x7b, 0x79, 0x01, 0x03, 0x55, 0xca, 0xbc, 0xe5, 0xab,
-	0xaf, 0x4a, 0x79, 0x71, 0x47, 0x59, 0xbc, 0x57, 0x59, 0xfc, 0x6f, 0x65, 0xf1, 0x8e, 0xb2, 0xe9,
-	0x1b, 0x78, 0x78, 0xbb, 0x9b, 0xab, 0xf8, 0x4b, 0xe8, 0xfa, 0x7e, 0x8e, 0x76, 0x1b, 0x1e, 0x8f,
-	0xe6, 0x12, 0xcd, 0x7c, 0xf3, 0x61, 0x64, 0x21, 0x39, 0x3d, 0x81, 0x47, 0x6f, 0x49, 0xdf, 0x8d,
-	0x93, 0xff, 0x2b, 0x1b, 0xc3, 0xa8, 0x5d, 0xe6, 0x2a, 0xdf, 0xe8, 0x13, 0x89, 0xbe, 0x77, 0xa3,
-	0x76, 0x99, 0xab, 0x8e, 0xbf, 0x33, 0x18, 0x6f, 0xae, 0x7d, 0x54, 0xf6, 0x9b, 0x5e, 0x2a, 0xfe,
-	0x0a, 0x06, 0xb4, 0xdc, 0xb9, 0x59, 0xf1, 0x31, 0x75, 0x6a, 0xfd, 0x8f, 0x87, 0x8f, 0x77, 0x88,
-	0xab, 0xf8, 0x09, 0xc0, 0xed, 0x80, 0x9c, 0xd3, 0x85, 0xad, 0x45, 0x0f, 0x0f, 0xee, 0xb0, 0x50,
-	0xd6, 0x8c, 0x73, 0xbe, 0x29, 0xdb, 0x5a, 0xab, 0x29, 0xdb, 0x9e, 0xf9, 0xec, 0xe9, 0x8f, 0xf5,
-	0x84, 0xfd, 0x5c, 0x4f, 0xd8, 0xef, 0xf5, 0x84, 0x5d, 0xff, 0x99, 0x3c, 0xf8, 0xec, 0x9f, 0xe2,
-	0xa2, 0x47, 0xcf, 0xf2, 0xf5, 0xdf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x9a, 0xad, 0x2d, 0x7d, 0xad,
-	0x03, 0x00, 0x00,
+	// 624 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x95, 0xc1, 0x6e, 0xd3, 0x4c,
+	0x10, 0xc7, 0x3f, 0xdb, 0x71, 0x1a, 0x4f, 0xbe, 0xa6, 0xe9, 0xb6, 0x80, 0x89, 0x68, 0x14, 0x59,
+	0x48, 0xe4, 0x80, 0x82, 0x14, 0xa8, 0xd4, 0x1e, 0x53, 0xc4, 0x01, 0x09, 0x09, 0xc9, 0x88, 0x43,
+	0xb9, 0x44, 0x4e, 0x76, 0x2b, 0x56, 0x6d, 0xbd, 0x8b, 0x77, 0x0d, 0xea, 0x1b, 0xf0, 0x08, 0x7d,
+	0x06, 0x9e, 0x84, 0x23, 0x57, 0x6e, 0x28, 0xbc, 0x08, 0xda, 0x5d, 0xdb, 0xd9, 0x38, 0x21, 0x02,
+	0x6e, 0x9e, 0xff, 0xec, 0xec, 0xcc, 0xfc, 0xf6, 0x1f, 0x05, 0x0e, 0xc8, 0x3c, 0x17, 0x72, 0x7a,
+	0x45, 0x67, 0x59, 0x92, 0xdd, 0x8c, 0x78, 0xc6, 0x24, 0x43, 0x1e, 0x96, 0x2c, 0xba, 0x75, 0x21,
+	0x78, 0xa1, 0x92, 0x67, 0x8c, 0x5d, 0xa2, 0x0e, 0xb8, 0x14, 0x87, 0xce, 0xc0, 0x19, 0x7a, 0xb1,
+	0x4b, 0x31, 0xba, 0x0b, 0xcd, 0x24, 0x97, 0xef, 0x59, 0x16, 0xba, 0x03, 0x67, 0x18, 0xc4, 0x45,
+	0x84, 0x0e, 0xc1, 0x97, 0x54, 0x5e, 0x91, 0xd0, 0xd3, 0xb2, 0x09, 0x94, 0xca, 0x33, 0x22, 0x44,
+	0xd8, 0x30, 0xaa, 0x0e, 0x10, 0x82, 0xc6, 0x0d, 0x49, 0xb2, 0xd0, 0x1f, 0x38, 0x43, 0x3f, 0xd6,
+	0xdf, 0xe8, 0x1e, 0xec, 0xcc, 0x18, 0xbb, 0x9c, 0x52, 0x1c, 0x36, 0xcd, 0xc5, 0x2a, 0x7c, 0x89,
+	0xd5, 0x61, 0x2a, 0x66, 0x69, 0xb8, 0xa3, 0x55, 0xfd, 0x8d, 0x06, 0xd0, 0xa6, 0xa9, 0x90, 0x54,
+	0xe6, 0x92, 0xb2, 0x34, 0x6c, 0xe9, 0x94, 0x2d, 0xa9, 0x31, 0x85, 0x4c, 0x64, 0x2e, 0xc2, 0x40,
+	0x37, 0x29, 0x22, 0x74, 0x04, 0x30, 0xcf, 0x48, 0x22, 0x09, 0x9e, 0x26, 0x32, 0x04, 0xbd, 0x56,
+	0x50, 0x28, 0x13, 0xa9, 0xd2, 0x39, 0xc7, 0x65, 0xba, 0x6d, 0xd2, 0x85, 0x32, 0x91, 0xd1, 0x67,
+	0x17, 0xda, 0xaf, 0xa8, 0x21, 0x13, 0x93, 0x0f, 0x16, 0x0c, 0x67, 0xe0, 0x6d, 0x82, 0xe1, 0x6a,
+	0xb9, 0x0e, 0xc3, 0x33, 0xaa, 0x81, 0x71, 0x04, 0x20, 0x64, 0x92, 0xc9, 0xa9, 0x46, 0xd2, 0xd0,
+	0xd3, 0x06, 0x5a, 0x39, 0x57, 0x5c, 0xee, 0x43, 0x8b, 0xa4, 0x78, 0x6a, 0xf1, 0xda, 0x21, 0x29,
+	0x3e, 0x5f, 0x43, 0xe6, 0x6d, 0x44, 0xe6, 0xfd, 0x1e, 0x99, 0xb7, 0x01, 0x19, 0xbb, 0xb8, 0x10,
+	0x44, 0x96, 0xc8, 0x4c, 0xa4, 0xc6, 0x9e, 0xb3, 0x3c, 0x35, 0xb4, 0xfc, 0xd8, 0x04, 0xd1, 0x33,
+	0xf8, 0x7f, 0x49, 0x42, 0x70, 0xf4, 0x10, 0x7c, 0xd5, 0x5d, 0x68, 0x12, 0xed, 0x71, 0x67, 0x84,
+	0x25, 0x1b, 0x55, 0x36, 0x8a, 0x4d, 0x32, 0x3a, 0x86, 0xdd, 0xe7, 0x1a, 0x76, 0x49, 0xf0, 0xcf,
+	0xca, 0xba, 0xd0, 0xb1, 0xcb, 0x04, 0x57, 0x17, 0xbd, 0xd5, 0xcf, 0xf2, 0xd7, 0x17, 0xd9, 0x65,
+	0x82, 0x47, 0x5f, 0x1c, 0x00, 0x7d, 0x6c, 0x82, 0xaf, 0x69, 0xba, 0x66, 0xf7, 0x1e, 0xb4, 0x72,
+	0x41, 0xb2, 0x34, 0xb9, 0x26, 0x85, 0xe1, 0xab, 0x58, 0xe5, 0x78, 0x22, 0xc4, 0x27, 0x96, 0xe1,
+	0xc2, 0xf5, 0x55, 0x6c, 0xf9, 0xaf, 0xb1, 0xc5, 0x7f, 0xfe, 0x76, 0xff, 0x35, 0xeb, 0xfe, 0x3b,
+	0x2d, 0x39, 0xe8, 0x61, 0xd5, 0xda, 0x8f, 0xa0, 0x99, 0xa8, 0xef, 0x72, 0xef, 0xbd, 0xe5, 0xde,
+	0xe6, 0x4c, 0x91, 0x8e, 0xf6, 0x61, 0x6f, 0xa5, 0x54, 0xf0, 0xe8, 0xb1, 0x79, 0xc2, 0xea, 0xae,
+	0x07, 0x10, 0x94, 0xbb, 0x89, 0xc2, 0xd0, 0x4b, 0x21, 0x3a, 0x81, 0x5d, 0xeb, 0xb4, 0xe0, 0x56,
+	0x6b, 0x77, 0x7b, 0xeb, 0xd3, 0x12, 0xfa, 0x3f, 0x4d, 0xbd, 0x52, 0x2a, 0xf8, 0xf8, 0xbb, 0x0b,
+	0xdd, 0xea, 0x5d, 0xdf, 0x90, 0xec, 0x23, 0x9d, 0x13, 0xf4, 0x04, 0x5a, 0xa5, 0x1b, 0x51, 0x57,
+	0x5f, 0x66, 0xfd, 0x4c, 0x7b, 0xfb, 0x35, 0x45, 0x70, 0x74, 0x0c, 0xb0, 0x74, 0x14, 0x42, 0xfa,
+	0xc0, 0x8a, 0x33, 0x7b, 0x07, 0x6b, 0x9a, 0x29, 0x2b, 0xfc, 0xf3, 0xba, 0x2a, 0x5b, 0xf1, 0x61,
+	0x51, 0xb6, 0x6a, 0x32, 0x74, 0x02, 0x6d, 0x0b, 0x3e, 0xb2, 0xaf, 0x2e, 0x99, 0xf4, 0x0e, 0xd7,
+	0x45, 0xc1, 0xd1, 0x18, 0x82, 0x8a, 0x3a, 0x5a, 0xee, 0x51, 0x55, 0xa1, 0xba, 0x64, 0xba, 0x59,
+	0xd0, 0x90, 0x3d, 0x51, 0xad, 0x5b, 0x8d, 0xed, 0xd9, 0x9d, 0xaf, 0x8b, 0xbe, 0xf3, 0x6d, 0xd1,
+	0x77, 0x7e, 0x2c, 0xfa, 0xce, 0xed, 0xcf, 0xfe, 0x7f, 0xef, 0xd4, 0x3f, 0xc2, 0xac, 0xa9, 0xff,
+	0x1d, 0x9e, 0xfe, 0x0a, 0x00, 0x00, 0xff, 0xff, 0x09, 0x08, 0x73, 0x72, 0x34, 0x06, 0x00, 0x00,
 }
 
 func (m *EcustBook) Marshal() (dAtA []byte, err error) {
@@ -642,6 +1028,16 @@ func (m *ListBookReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	if m.XXX_unrecognized != nil {
 		i -= len(m.XXX_unrecognized)
 		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.Count != 0 {
+		i = encodeVarintEcustLibrary(dAtA, i, uint64(m.Count))
+		i--
+		dAtA[i] = 0x50
+	}
+	if m.Offset != 0 {
+		i = encodeVarintEcustLibrary(dAtA, i, uint64(m.Offset))
+		i--
+		dAtA[i] = 0x48
 	}
 	if len(m.Institution) > 0 {
 		for iNdEx := len(m.Institution) - 1; iNdEx >= 0; iNdEx-- {
@@ -887,6 +1283,280 @@ func (m *UpdateBookResp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *EcustAdmin) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *EcustAdmin) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *EcustAdmin) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.UpdatedAt != 0 {
+		i = encodeVarintEcustLibrary(dAtA, i, uint64(m.UpdatedAt))
+		i--
+		dAtA[i] = 0x30
+	}
+	if m.CreatedAt != 0 {
+		i = encodeVarintEcustLibrary(dAtA, i, uint64(m.CreatedAt))
+		i--
+		dAtA[i] = 0x28
+	}
+	if m.Status != 0 {
+		i = encodeVarintEcustLibrary(dAtA, i, uint64(m.Status))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.Password) > 0 {
+		i -= len(m.Password)
+		copy(dAtA[i:], m.Password)
+		i = encodeVarintEcustLibrary(dAtA, i, uint64(len(m.Password)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Username) > 0 {
+		i -= len(m.Username)
+		copy(dAtA[i:], m.Username)
+		i = encodeVarintEcustLibrary(dAtA, i, uint64(len(m.Username)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if m.Id != 0 {
+		i = encodeVarintEcustLibrary(dAtA, i, uint64(m.Id))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *CreateAdminReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CreateAdminReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *CreateAdminReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.Admins) > 0 {
+		for iNdEx := len(m.Admins) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Admins[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintEcustLibrary(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *CreateAdminResp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CreateAdminResp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *CreateAdminResp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListAdminReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListAdminReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListAdminReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.Usernames) > 0 {
+		for iNdEx := len(m.Usernames) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Usernames[iNdEx])
+			copy(dAtA[i:], m.Usernames[iNdEx])
+			i = encodeVarintEcustLibrary(dAtA, i, uint64(len(m.Usernames[iNdEx])))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ListAdminResp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ListAdminResp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ListAdminResp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.Admins) > 0 {
+		for iNdEx := len(m.Admins) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Admins[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintEcustLibrary(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateAdminReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateAdminReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateAdminReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.Admins) > 0 {
+		for iNdEx := len(m.Admins) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.Admins[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintEcustLibrary(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *UpdateAdminResp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateAdminResp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *UpdateAdminResp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintEcustLibrary(dAtA []byte, offset int, v uint64) int {
 	offset -= sovEcustLibrary(v)
 	base := offset
@@ -997,6 +1667,12 @@ func (m *ListBookReq) Size() (n int) {
 			n += 1 + l + sovEcustLibrary(uint64(l))
 		}
 	}
+	if m.Offset != 0 {
+		n += 1 + sovEcustLibrary(uint64(m.Offset))
+	}
+	if m.Count != 0 {
+		n += 1 + sovEcustLibrary(uint64(m.Count))
+	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -1070,6 +1746,134 @@ func (m *UpdateBookReq) Size() (n int) {
 }
 
 func (m *UpdateBookResp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *EcustAdmin) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Id != 0 {
+		n += 1 + sovEcustLibrary(uint64(m.Id))
+	}
+	l = len(m.Username)
+	if l > 0 {
+		n += 1 + l + sovEcustLibrary(uint64(l))
+	}
+	l = len(m.Password)
+	if l > 0 {
+		n += 1 + l + sovEcustLibrary(uint64(l))
+	}
+	if m.Status != 0 {
+		n += 1 + sovEcustLibrary(uint64(m.Status))
+	}
+	if m.CreatedAt != 0 {
+		n += 1 + sovEcustLibrary(uint64(m.CreatedAt))
+	}
+	if m.UpdatedAt != 0 {
+		n += 1 + sovEcustLibrary(uint64(m.UpdatedAt))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *CreateAdminReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Admins) > 0 {
+		for _, e := range m.Admins {
+			l = e.Size()
+			n += 1 + l + sovEcustLibrary(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *CreateAdminResp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *ListAdminReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Usernames) > 0 {
+		for _, s := range m.Usernames {
+			l = len(s)
+			n += 1 + l + sovEcustLibrary(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *ListAdminResp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Admins) > 0 {
+		for _, e := range m.Admins {
+			l = e.Size()
+			n += 1 + l + sovEcustLibrary(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *UpdateAdminReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Admins) > 0 {
+		for _, e := range m.Admins {
+			l = e.Size()
+			n += 1 + l + sovEcustLibrary(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *UpdateAdminResp) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1687,6 +2491,44 @@ func (m *ListBookReq) Unmarshal(dAtA []byte) error {
 			}
 			m.Institution = append(m.Institution, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
+		case 9:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
+			}
+			m.Offset = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Offset |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 10:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Count", wireType)
+			}
+			m.Count = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Count |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipEcustLibrary(dAtA[iNdEx:])
@@ -2057,6 +2899,658 @@ func (m *UpdateBookResp) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: UpdateBookResp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipEcustLibrary(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *EcustAdmin) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowEcustLibrary
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: EcustAdmin: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: EcustAdmin: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Username", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Username = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Password", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Password = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			m.Status = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Status |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			m.CreatedAt = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CreatedAt |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
+			}
+			m.UpdatedAt = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.UpdatedAt |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipEcustLibrary(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *CreateAdminReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowEcustLibrary
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: CreateAdminReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: CreateAdminReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Admins", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Admins = append(m.Admins, &EcustAdmin{})
+			if err := m.Admins[len(m.Admins)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipEcustLibrary(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *CreateAdminResp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowEcustLibrary
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: CreateAdminResp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: CreateAdminResp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipEcustLibrary(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListAdminReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowEcustLibrary
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListAdminReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListAdminReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Usernames", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Usernames = append(m.Usernames, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipEcustLibrary(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ListAdminResp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowEcustLibrary
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ListAdminResp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ListAdminResp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Admins", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Admins = append(m.Admins, &EcustAdmin{})
+			if err := m.Admins[len(m.Admins)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipEcustLibrary(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateAdminReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowEcustLibrary
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateAdminReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateAdminReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Admins", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowEcustLibrary
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Admins = append(m.Admins, &EcustAdmin{})
+			if err := m.Admins[len(m.Admins)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipEcustLibrary(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) < 0 {
+				return ErrInvalidLengthEcustLibrary
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateAdminResp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowEcustLibrary
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateAdminResp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateAdminResp: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
