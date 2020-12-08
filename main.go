@@ -2,8 +2,10 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/lz1998/ecust_library/config"
 	"github.com/lz1998/ecust_library/handler"
 	log "github.com/sirupsen/logrus"
+	"os"
 )
 
 func init() {
@@ -14,6 +16,11 @@ func init() {
 }
 
 func main() {
+	jwtSecRet := os.Getenv("JWT_SECRET")
+	if jwtSecRet != "" {
+		config.JwtSecret = jwtSecRet
+	}
+
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	{
