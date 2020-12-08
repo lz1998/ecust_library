@@ -73,7 +73,7 @@ func convertBookModelToProto(modelBook *book.EcustBook) *dto.EcustBook {
 		Id:          modelBook.ID,
 		Author:      modelBook.Author,
 		Title:       modelBook.Title,
-		Press:       modelBook.Author,
+		Press:       modelBook.Press,
 		Year:        modelBook.Year,
 		BookId:      modelBook.BookId,
 		Isbn:        modelBook.Isbn,

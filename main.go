@@ -17,7 +17,7 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	{
-		group := router.Group("/ecust")
+		group := router.Group("/ecust/book/update")
 		group.POST("/book/list", handler.ListBook)
 		group.POST("/book/create", handler.CreateBook)
 		group.POST("/book/update", handler.UpdateBook)
