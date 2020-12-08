@@ -1,7 +1,10 @@
 package handler
 
 import (
+	"errors"
+	"fmt"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -10,6 +13,8 @@ import (
 	"github.com/lz1998/ecust_library/dto"
 	"github.com/lz1998/ecust_library/model/admin"
 )
+
+const bearerLength = len("Bearer ")
 
 func CreateAdmin(c *gin.Context) {
 	req := &dto.CreateAdminReq{}
@@ -126,6 +131,25 @@ func Login(c *gin.Context) {
 	Return(c, resp)
 }
 
+func CheckLogin(c *gin.Context) {
+
+	authHeader := c.GetHeader("Authorization")
+	if len(authHeader) < bearerLength {
+		c.String(http.StatusUnauthorized, "not login")
+		c.Abort()
+		return
+	}
+	jwtStr := strings.TrimSpace(authHeader[bearerLength:])
+	ecustAdmin, err := jwtParseUser(jwtStr)
+	if err != nil {
+		c.String(http.StatusUnauthorized, "not login")
+		c.Abort()
+		return
+	}
+	c.Set("admin", ecustAdmin)
+	c.Next()
+}
+
 func convertAdminModelToProto(modelAdmin *admin.EcustAdmin) *dto.EcustAdmin {
 	return &dto.EcustAdmin{
 		Id:        modelAdmin.ID,
@@ -157,4 +181,30 @@ func GenerateJwtTokenString(admin *admin.EcustAdmin) (string, error) {
 	claims["updatedAt"] = admin.UpdatedAt.Unix()
 	token.Claims = claims
 	return token.SignedString(config.JwtSecret)
+}
+
+func jwtParseUser(tokenString string) (*admin.EcustAdmin, error) {
+	if tokenString == "" {
+		return nil, errors.New("no token is found in Authorization Bearer")
+	}
+	claims := make(jwt.MapClaims)
+	_, err := jwt.ParseWithClaims(tokenString, &claims, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return config.JwtSecret, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	ecustAdmin := &admin.EcustAdmin{
+		ID:        int64(claims["id"].(float64)),
+		Username:  claims["username"].(string),
+		Password:  claims["email"].(string),
+		Status:    claims["Status"].(int32),
+		UpdatedAt: time.Unix(int64(claims["updatedAt"].(float64)), 0),
+		CreatedAt: time.Unix(int64(claims["createdAt"].(float64)), 0),
+	}
+	return ecustAdmin, nil
 }
