@@ -2,8 +2,11 @@ package handler
 
 import (
 	"net/http"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/lz1998/ecust_library/config"
 	"github.com/lz1998/ecust_library/dto"
 	"github.com/lz1998/ecust_library/model/admin"
 )
@@ -74,6 +77,55 @@ func UpdateAdmin(c *gin.Context) {
 	Return(c, resp)
 }
 
+func Login(c *gin.Context) {
+	req := &dto.LoginReq{}
+
+	if err := c.Bind(req); err != nil {
+		c.String(http.StatusBadRequest, "bad request, not protobuf")
+		return
+	}
+
+	ecustAdmin, err := admin.GetAdminByUsername(req.GetUsername())
+	if err != nil {
+		resp := &dto.LoginResp{
+			Success: false,
+			Msg:     "get admin by username error",
+			Token:   "",
+		}
+		Return(c, resp)
+		return
+	}
+
+	// TODO 加密
+	if ecustAdmin.Password == req.GetPassword() {
+		token, err := GenerateJwtTokenString(ecustAdmin)
+		if err != nil {
+			resp := &dto.LoginResp{
+				Success: false,
+				Msg:     "generate token error",
+				Token:   "",
+			}
+			Return(c, resp)
+			return
+		}
+
+		resp := &dto.LoginResp{
+			Success: true,
+			Msg:     "ok",
+			Token:   token,
+		}
+		Return(c, resp)
+		return
+	}
+
+	resp := &dto.LoginResp{
+		Success: false,
+		Msg:     "password error",
+		Token:   "",
+	}
+	Return(c, resp)
+}
+
 func convertAdminModelToProto(modelAdmin *admin.EcustAdmin) *dto.EcustAdmin {
 	return &dto.EcustAdmin{
 		Id:        modelAdmin.ID,
@@ -91,4 +143,18 @@ func convertAdminsModelToProto(modelAdmins []*admin.EcustAdmin) []*dto.EcustAdmi
 		admins = append(admins, convertAdminModelToProto(modelAdmin))
 	}
 	return admins
+}
+
+func GenerateJwtTokenString(admin *admin.EcustAdmin) (string, error) {
+	token := jwt.New(jwt.SigningMethodHS256)
+	claims := make(jwt.MapClaims)
+	claims["expire"] = time.Now().Add(time.Hour * time.Duration(24)).Unix()
+	claims["id"] = admin.ID
+	claims["username"] = admin.Username
+	claims["password"] = admin.Password
+	claims["status"] = admin.Status
+	claims["createdAt"] = admin.CreatedAt.Unix()
+	claims["updatedAt"] = admin.UpdatedAt.Unix()
+	token.Claims = claims
+	return token.SignedString(config.JwtSecret)
 }

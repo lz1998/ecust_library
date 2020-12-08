@@ -19,6 +19,8 @@ func main() {
 	{
 		group := router.Group("/ecust")
 
+		group.POST("/admin/login", handler.Login)
+
 		group.POST("/admin/list", handler.ListAdmin)
 		group.POST("/admin/create", handler.CreateAdmin)
 		group.POST("/admin/update", handler.UpdateAdmin)

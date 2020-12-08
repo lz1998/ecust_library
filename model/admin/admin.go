@@ -25,7 +25,7 @@ func CreateAdmin(username string, password string) error {
 		return fmt.Errorf("username exists")
 	}
 	return model.Db.Save(&EcustAdmin{
-		Username: username,
+		Username: username, // TODO 加密保存
 		Password: password,
 	}).Error
 }
@@ -34,6 +34,7 @@ func ListAdmin(usernames []string) ([]*EcustAdmin, error) {
 	var admins []*EcustAdmin
 
 	q := model.Db.Model(&EcustAdmin{})
+	q = q.Where("status = 0")
 	if len(usernames) != 0 {
 		q = q.Where("username in ?", usernames)
 	}
@@ -44,12 +45,20 @@ func ListAdmin(usernames []string) ([]*EcustAdmin, error) {
 	return admins, nil
 }
 
+func GetAdminByUsername(username string) (*EcustAdmin, error) {
+	var admin EcustAdmin
+	if err := model.Db.Model(&EcustAdmin{}).Where("username = ?", username).Where("status = 0").First(&admin).Error; err != nil {
+		return nil, err
+	}
+	return &admin, nil
+}
+
 func UpdateAdmin(username string, password string, status int32) error {
 	var admin EcustAdmin
 	if err := model.Db.Model(&EcustAdmin{}).Where("username = ?", username).First(&admin).Error; err != nil {
 		return err
 	}
-	admin.Password = password
+	admin.Password = password // TODO 加密保存
 	admin.Status = status
 	return model.Db.Save(admin).Error
 }
