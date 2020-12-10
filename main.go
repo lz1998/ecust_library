@@ -1,11 +1,12 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"github.com/lz1998/ecust_library/config"
 	"github.com/lz1998/ecust_library/handler"
 	log "github.com/sirupsen/logrus"
-	"os"
 )
 
 func init() {

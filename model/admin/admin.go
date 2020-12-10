@@ -16,6 +16,12 @@ type EcustAdmin struct {
 	UpdatedAt time.Time `gorm:"column:updated_at" json:"updated_at" form:"updated_at"`
 }
 
+func init() {
+	if err := model.Db.AutoMigrate(&EcustAdmin{}); err != nil {
+		panic(err)
+	}
+}
+
 func CreateAdmin(username string, password string) error {
 	admins, err := ListAdmin([]string{username})
 	if err != nil {
