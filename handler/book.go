@@ -38,7 +38,7 @@ func ListBook(c *gin.Context) {
 		c.String(http.StatusBadRequest, "bad request, not protobuf")
 		return
 	}
-	books, err := book.ListBook(req.Author, req.Title, req.Press, req.StartYear, req.EndYear, req.BookId, req.Isbn, req.Institution)
+	books, total, err := book.ListBook(int(req.Offset), int(req.Count), req.Author, req.Title, req.Press, req.StartYear, req.EndYear, req.BookId, req.Isbn, req.Institution)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "db error")
 		return
@@ -46,6 +46,7 @@ func ListBook(c *gin.Context) {
 
 	resp := &dto.ListBookResp{
 		Books: convertBooksModelToProto(books),
+		Total: int32(total),
 	}
 	Return(c, resp)
 }

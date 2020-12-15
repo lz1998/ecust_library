@@ -40,7 +40,7 @@ func CreateBook(author string, title string, press string, year int32, bookId st
 	return model.Db.Save(book).Error
 }
 
-func ListBook(author []string, title []string, press []string, startYear int32, endYear int32, bookId []string, isbn []string, institution []string) ([]*EcustBook, error) {
+func ListBook(offset int, count int, author []string, title []string, press []string, startYear int32, endYear int32, bookId []string, isbn []string, institution []string) ([]*EcustBook, int64, error) {
 	q := model.Db.Model(&EcustBook{})
 	if len(author) != 0 {
 		q = q.Where("author in ?", author)
@@ -67,11 +67,17 @@ func ListBook(author []string, title []string, press []string, startYear int32, 
 		q = q.Where("institution in ?", institution)
 	}
 	q = q.Where("status = 0")
+
+	// 计算总数
+	var total int64
+	q.Count(&total)
+
+	q = q.Order("id").Offset(offset).Limit(count)
 	var books []*EcustBook
 	if err := q.Find(&books).Error; err != nil {
-		return nil, err
+		return nil, 0, err
 	}
-	return books, nil
+	return books, total, nil
 }
 
 func UpdateBook(id int64, author string, title string, press string, year int32, bookId string, isbn string, institution string, status int32) error {
