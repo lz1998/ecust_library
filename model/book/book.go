@@ -40,31 +40,43 @@ func CreateBook(author string, title string, press string, year int32, bookId st
 	return model.Db.Save(book).Error
 }
 
-func ListBook(offset int, count int, author []string, title []string, press []string, startYear int32, endYear int32, bookId []string, isbn []string, institution []string) ([]*EcustBook, int64, error) {
+func ListBook(offset int, count int, authors []string, titles []string, presses []string, startYear int32, endYear int32, bookIds []string, isbns []string, institutions []string) ([]*EcustBook, int64, error) {
 	q := model.Db.Model(&EcustBook{})
-	if len(author) != 0 {
-		q = q.Where("author in ?", author)
+	if len(authors) != 0 {
+		for _, author := range authors {
+			q = q.Where("author like ?", "%"+author+"%")
+		}
 	}
-	if len(title) != 0 {
-		q = q.Where("title in ?", title)
+	if len(titles) != 0 {
+		for _, title := range titles {
+			q = q.Where("title like ?", "%"+title+"%")
+		}
 	}
-	if len(press) != 0 {
-		q = q.Where("press in ?", press)
+	if len(presses) != 0 {
+		for _, press := range presses {
+			q = q.Where("press like ?", "%"+press+"%")
+		}
+	}
+	if len(bookIds) != 0 {
+		for _, bookId := range bookIds {
+			q = q.Where("book_id like ?", "%"+bookId+"%")
+		}
+	}
+	if len(isbns) != 0 {
+		for _, isbn := range isbns {
+			q = q.Where("isbn like ?", "%"+isbn+"%")
+		}
+	}
+	if len(institutions) != 0 {
+		for _, institution := range institutions {
+			q = q.Where("institution like ?", "%"+institution+"%")
+		}
 	}
 	if startYear != 0 {
 		q = q.Where("year > ?", startYear)
 	}
 	if endYear != 0 {
 		q = q.Where("year < ?", endYear)
-	}
-	if len(bookId) != 0 {
-		q = q.Where("book_id in ?", bookId)
-	}
-	if len(isbn) != 0 {
-		q = q.Where("isbn in ?", isbn)
-	}
-	if len(institution) != 0 {
-		q = q.Where("institution in ?", institution)
 	}
 	q = q.Where("status = 0")
 

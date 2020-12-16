@@ -1,5 +1,5 @@
 package config
 
 var (
-	JwtSecret = "aaa"
+	JwtSecret = []byte("aaa")
 )

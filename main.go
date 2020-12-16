@@ -19,7 +19,7 @@ func init() {
 func main() {
 	jwtSecRet := os.Getenv("JWT_SECRET")
 	if jwtSecRet != "" {
-		config.JwtSecret = jwtSecRet
+		config.JwtSecret = []byte(jwtSecRet)
 	}
 
 	gin.SetMode(gin.ReleaseMode)
