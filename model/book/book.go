@@ -84,7 +84,7 @@ func ListBook(offset int, count int, authors []string, titles []string, presses 
 	var total int64
 	q.Count(&total)
 
-	q = q.Order("id").Offset(offset).Limit(count)
+	q = q.Order("year").Order("id").Offset(offset).Limit(count)
 	var books []*EcustBook
 	if err := q.Find(&books).Error; err != nil {
 		return nil, 0, err
